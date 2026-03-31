@@ -11,7 +11,7 @@ public class Main {
             play();
             String playagain = window.readInput("Do your want to play again (y/n)").toLowerCase();
             if(playagain.equals("n")){
-                break;
+                System.exit(0);
             }
 
         }while(true);
