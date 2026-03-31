@@ -1,18 +1,31 @@
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Scanner;
 
 public class Main {
-    public void main(String[] args) {
+
+    public static Window window = new Window();
+
+    public static void main(String[] args) {
+
+        do{
+
+            play();
+            String playagain = window.readInput("Do your want to play again (y/n)").toLowerCase();
+            if(playagain.equals("n")){
+                break;
+            }
+
+        }while(true);
+
+    }
+
+    static void play(){
+
         int chance = 0;
         int check = 0;
         int win = 0;
         Leitor leitor = new Leitor();
         String teste = leitor.jogo();
         Welcome welcome = new Welcome();
-        Scanner scanner = new Scanner(System.in);
         ArrayList<String> lista = new ArrayList<>();
         ArrayList<String> listacheca = new ArrayList<>();
         String[] aux = teste.split(" ");
@@ -29,17 +42,16 @@ public class Main {
         }
         lista.remove(lista.size()- 1);
         String[] auxa = teste.split("");
-        String escolha;
         String teste2 = teste.replace(" ","");
         String[] auxb = teste2.split("");
 
         do {
-
-            do{
+            String escolha;
+            do {
                 System.out.println();
-                System.out.print("Guess a letter: ");
-                escolha = scanner.nextLine();
-            }while(listacheca.contains(escolha));
+                escolha = window.readInput("Guess a letter: ").trim();
+            } while (escolha.isEmpty() || listacheca.contains(escolha));
+
             for (int i = 0; i < lista.toArray().length; i++) {
                 if (auxa[i].equals(escolha)) {
                     listacheca.add(escolha);
